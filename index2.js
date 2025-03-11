@@ -10,6 +10,7 @@ class linkedList {
     this.tail = null;
     this.length = 0;
   }
+  // gang
   push(value) {
     let newNode = new Node(value);
     if (!this.head) {
