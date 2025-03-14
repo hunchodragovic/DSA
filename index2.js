@@ -26,13 +26,13 @@ class linkedList {
   pop() {
     if (!this.head) return undefined;
     let current = this.head;
-    let newTail = current;
+    let temp = current;
     while (current.next) {
-      newTail = current;
+      temp = current;
       current = current.next;
     }
-    newTail.next = null;
-    this.tail = newTail;
+    temp.next = null;
+    this.tail = temp;
     this.length--;
     if (this.length === 0) {
       this.head = null;
