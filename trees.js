@@ -5,7 +5,7 @@ class BinaryTreeNode {
     this.right = null;
   }
 }
-//
+// //
 
 const root = new BinaryTreeNode(10);
 root.left = new BinaryTreeNode(5);
