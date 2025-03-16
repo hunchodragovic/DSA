@@ -1,6 +1,6 @@
 class Node {
-  constructor(key) {
-    this.key = key;
+  constructor(value) {
+    this.value = value;
     this.left = null;
     this.right = null;
   }
@@ -10,64 +10,49 @@ class BST {
   constructor() {
     this.root = null;
   }
+  insert(value) {
+    const newNode = new Node(value);
+    if (!this.root) {
+      this.root = newNode;
+      return;
+    }
 
-  insert(root, key) {
-    if (root === null) {
-      return new Node(key);
+    let current = this.root;
+    while (true) {
+      if (value < current.value) {
+        if (!current.left) {
+          current.left = newNode;
+          return;
+        }
+        current = current.left;
+      } else {
+        if (!current.right) {
+          current.right = newNode;
+          return;
+        }
+        current = current.right;
+      }
     }
-    if (key < root.key) {
-      root.left = this.insert(root.left, key);
-    } else {
-      root.right = this.insert(root.right, key);
-    }
-    return root;
-  }
+  } // Add this closing brace
 
-  inorder(root) {
-    if (root) {
-      this.inorder(root.left);
-      process.stdout.write(root.key + " ");
-      this.inorder(root.right);
-    }
-  }
+  dfsPreOrder(node = this.root, data = []) {
+    if (node === null) return data; // Base case: If node is null, return the collected data
 
-  search(root, key) {
-    if (root === null || root.key === key) {
-      return root;
-    }
-    if (key < root.key) {
-      return this.search(root.left, key);
-    }
-    return this.search(root.right, key);
+    data.push(node.value); // Step 1: Visit the current node (Root)
+
+    if (node.left) this.dfsPreOrder(node.left, data); // Step 2: Traverse the left subtree
+    if (node.right) this.dfsPreOrder(node.right, data); // Step 3: Traverse the right subtree
+
+    return data; // Return the collected values
   }
 }
-
-// Creating the BST shown in the image
 const bst = new BST();
-bst.root = bst.insert(null, 8);
-bst.insert(bst.root, 3);
-bst.insert(bst.root, 10);
-bst.insert(bst.root, 1);
-bst.insert(bst.root, 6);
-bst.insert(bst.root, 14);
-bst.insert(bst.root, 4);
-bst.insert(bst.root, 7);
-bst.insert(bst.root, 13);
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+bst.insert(3);
+bst.insert(7);
+bst.insert(12);
+bst.insert(18);
 
-// Performing inorder traversal to verify the BST structure
-console.log("Inorder Traversal of the BST:");
-bst.inorder(bst.root);
-
-// Searching for numbers 3, 9, and 10
-console.log(
-  "\nSearching for 3:",
-  bst.search(bst.root, 3) ? "Found" : "Not Found"
-);
-console.log(
-  "Searching for 9:",
-  bst.search(bst.root, 9) ? "Found" : "Not Found"
-);
-console.log(
-  "Searching for 10:",
-  bst.search(bst.root, 10) ? "Found" : "Not Found"
-);
+console.log("Pre-order traversal:", bst.dfsPreOrder()); // [10, 5, 2, 7, 15, 12, 20]
