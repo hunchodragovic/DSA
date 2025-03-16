@@ -30,6 +30,16 @@ class BST {
       this.inorder(root.right);
     }
   }
+
+  search(root, key) {
+    if (root === null || root.key === key) {
+      return root;
+    }
+    if (key < root.key) {
+      return this.search(root.left, key);
+    }
+    return this.search(root.right, key);
+  }
 }
 
 // Creating the BST shown in the image
@@ -47,3 +57,17 @@ bst.insert(bst.root, 13);
 // Performing inorder traversal to verify the BST structure
 console.log("Inorder Traversal of the BST:");
 bst.inorder(bst.root);
+
+// Searching for numbers 3, 9, and 10
+console.log(
+  "\nSearching for 3:",
+  bst.search(bst.root, 3) ? "Found" : "Not Found"
+);
+console.log(
+  "Searching for 9:",
+  bst.search(bst.root, 9) ? "Found" : "Not Found"
+);
+console.log(
+  "Searching for 10:",
+  bst.search(bst.root, 10) ? "Found" : "Not Found"
+);
