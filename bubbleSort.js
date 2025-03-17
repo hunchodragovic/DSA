@@ -61,3 +61,32 @@ function insertionSort(arr) {
 }
 
 console.log(insertionSort([5, 3, 8, 4, 2])); // Output: [2, 3, 4, 5, 8]
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr; // Base case
+
+  let mid = Math.floor(arr.length / 2); // Find the middle index
+  let left = mergeSort(arr.slice(0, mid)); // Recursively sort left half
+  let right = mergeSort(arr.slice(mid)); // Recursively sort right half
+
+  return merge(left, right); // Merge sorted halves
+}
+
+function merge(left, right) {
+  let result = [];
+  let i = 0,
+    j = 0;
+
+  while (i < left.length && j < right.length) {
+    if (left[i] < right[j]) {
+      result.push(left[i]);
+      i++;
+    } else {
+      result.push(right[j]);
+      j++;
+    }
+  }
+
+  return result.concat(left.slice(i)).concat(right.slice(j)); // Merge remaining elements
+}
+
+console.log(mergeSort([5, 3, 8, 4, 2])); // Output: [2, 3, 4, 5, 8]
