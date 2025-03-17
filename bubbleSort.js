@@ -40,3 +40,24 @@ function selectionSort(arr) {
 }
 
 console.log(selectionSort([5, 3, 8, 4, 2])); // Output: [2, 3, 4, 5, 8]
+
+function insertionSort(arr) {
+  let n = arr.length;
+
+  for (let i = 1; i < n; i++) {
+    let current = arr[i]; // The element to be placed correctly
+    let j = i - 1;
+
+    while (j >= 0 && arr[j] > current) {
+      // Shift elements to the right
+      arr[j + 1] = arr[j];
+      j--;
+    }
+
+    arr[j + 1] = current; // Insert the element in the correct position
+  }
+
+  return arr;
+}
+
+console.log(insertionSort([5, 3, 8, 4, 2])); // Output: [2, 3, 4, 5, 8]
